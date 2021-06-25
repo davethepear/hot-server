@@ -1,7 +1,7 @@
 # hot-server
 I wrote this for an older Dell Server that I use
 
-The script is a little over complicated, as most things I do are, because I have it check every two minutes and if it's hot, but not dying, I don't want it to flood me with emails about it (especially if I'm offsite and can't do anything about it). I plan to add more to it, ikr, to shut it off before it explodes.
+The script is a little over complicated, as most things I do are, because I have it check every two minutes and if it's hot, but not dying, I don't want it to flood me with emails about it (especially if I'm offsite and can't do anything about it). Added script to shut it off before it explodes.
 
 lm-sensors is required for this to work: 
 ```
@@ -34,5 +34,3 @@ add:
 ```bash
 */2 * * * * /dir-you-put-it-in/temphot.sh
 ```
-### To Do ###
-[ ] Shutdown temperature

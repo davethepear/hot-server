@@ -1,5 +1,5 @@
 # hot-server
-I wrote this for an older Dell Server that I use
+I wrote this for an older Dell PowerSpec Server that I use. I'm sure it can be adapted to work on most any PC that has sensors.
 
 The script is a little over complicated, as most things I do are, because I have it check every two minutes and if it's hot, but not dying, I don't want it to flood me with emails about it (especially if I'm offsite and can't do anything about it). Added script to shut it off before it explodes.
 

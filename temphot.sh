@@ -3,6 +3,8 @@
 ht=139
 # set your catastrophic temperature here
 ct=169
+# set your shut it down temp here!
+omfg=180
 # set your email here, mine mails locally
 email=administrator
 # change this to your home directory, or where you want them. They're basically temp files.
@@ -12,16 +14,24 @@ tdir=/home/administrator # no final / - it could cause issues
 # I set the temperatures at a conservative 139 and 169. I've not seen the temps this high.
 # Written by Dave the Pear - Lazy Admin
 
-# This checks Core 0 
+# This checks Core 0 and strips it down to just the temperature and then again to the integer
 tc=$(echo `sensors -f | grep Core\ 0 | awk '{ print int($3) }'`)
 tcc=$(echo `sensors -f | grep Core\ 0 | awk '{ print $3 }'`)
-# if the temp is 160 or higher, it will continuously nag
+
+# if the temp is higher than "omfg", shut it down! I added a minute, just because. It's untested, I assume it works.
+if [ "$tc" -gt "$omfg" ]; then
+    printf "CPU temperature is now at $tcc! \nI am shutting down to save the hardware and not cause a fire. \nFix the problem and then try again." | mail -s "SERVER SHUT DOWN!" $email
+    shutdown +1 "TOO HOT!"
+    exit 1
+fi
+
+# if the temp is catastrophic, or higher, it will continuously nag
 if [ "$tc" -gt "$ct" ]; then
     touch $tdir/.nagmail/TemperatureMailed
     printf "CPU temperature is now at $tcc! \nThis is NOT GOOD! \nIf you don't hear from me again in a few minutes, I am either cooled down or shut down. \n Do something!" | mail -s "SERVER TEMPERATURE EXTREMELY HIGH!" $email
    exit 1
 fi
-# if it's below 160 - continue
+# if it's below catastrophic - continue
 file=$tdir/.nagmail/TemperatureMailed
 fileagain=$tdir/.nagmail/TemperatureMailedAgain
 clear=$tdir/.nagmail/TemperatureClear

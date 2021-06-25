@@ -26,3 +26,6 @@ and...
 crontab -e (no, not sudo, doesn't need sudo)
 add:
 > */2 * * * * /dir-you-put-it-in/temphot.sh
+
+### To Do ###
+[ ] Shutdown temperature

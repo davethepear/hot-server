@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 # set your high temperature here. this server returns the temps in °F you can change to °C by removing the '-f' from sensors on line 10 and 11
 ht=139
 # set your catastrophic temperature here
